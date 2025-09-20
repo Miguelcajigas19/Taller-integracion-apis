@@ -265,6 +265,27 @@ class FlutterApp {
         border-radius: 8px;
         margin: 10px 0;
       }
+      
+      .post-actions {
+        margin-top: 10px;
+        text-align: right;
+      }
+      
+      .btn-delete {
+        background: #e53e3e;
+        color: white;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-delete:hover {
+        background: #c53030;
+        transform: translateY(-1px);
+      }
     ''';
     html.document.head!.children.add(style);
   }
@@ -318,7 +339,19 @@ class FlutterApp {
       final infoElement = html.Element.tag('small');
       infoElement.text = 'ID: ${post.id} | Usuario: ${post.userId}';
       
-      postElement.children.addAll([titleElement, bodyElement, infoElement]);
+      // Botón para eliminar post (solo para posts locales o de usuario)
+      final actionsDiv = html.DivElement();
+      actionsDiv.className = 'post-actions';
+      
+      if (post.userId >= 100) { // Posts locales/de usuario
+        final deleteButton = html.ButtonElement();
+        deleteButton.className = 'btn-delete';
+        deleteButton.text = '🗑️ Eliminar';
+        deleteButton.onClick.listen((_) => _deletePost(post.id));
+        actionsDiv.children.add(deleteButton);
+      }
+      
+      postElement.children.addAll([titleElement, bodyElement, infoElement, actionsDiv]);
       container.children.add(postElement);
     }
   }
@@ -525,5 +558,26 @@ class FlutterApp {
     }
     
     return posts;
+  }
+  
+  Future<void> _deletePost(int postId) async {
+    try {
+      // Confirmar eliminación
+      if (html.window.confirm('¿Estás seguro de que quieres eliminar este post?')) {
+        // Eliminar del almacenamiento local
+        await _storageService.deletePost(postId);
+        
+        // Eliminar de la lista en memoria
+        _posts.removeWhere((post) => post.id == postId);
+        
+        // Refrescar la vista
+        _showPostsSection();
+        
+        print('Post eliminado: $postId');
+      }
+    } catch (e) {
+      print('Error eliminando post: $e');
+      html.window.alert('Error al eliminar el post: $e');
+    }
   }
 }

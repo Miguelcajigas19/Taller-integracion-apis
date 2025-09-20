@@ -17,7 +17,27 @@ class ApiService {
       
       if (response.status == 200) {
         final List<dynamic> jsonList = jsonDecode(response.responseText!);
-        return jsonList.map((json) => Post.fromJson(json)).toList();
+        final allPosts = jsonList.map((json) => Post.fromJson(json)).toList();
+        
+        // Filtrar posts: encontrar el post específico y mantener solo los 4 primeros anteriores
+        int cutoffIndex = -1;
+        
+        for (int i = 0; i < allPosts.length; i++) {
+          if (allPosts[i].title.contains('sunt aut facere repellat provident')) {
+            cutoffIndex = i;
+            break;
+          }
+        }
+        
+        // Si encontramos el post objetivo, tomar máximo 4 posts anteriores (excluyendo el objetivo)
+        if (cutoffIndex >= 0) {
+          // Tomar los posts anteriores al objetivo, máximo 4
+          final postsBeforeTarget = allPosts.take(cutoffIndex).toList();
+          return postsBeforeTarget.length > 4 ? postsBeforeTarget.take(4).toList() : postsBeforeTarget;
+        } else {
+          // Si no encontramos el post objetivo, tomar los primeros 4
+          return allPosts.take(4).toList();
+        }
       } else {
         throw Exception('Error al obtener posts: ${response.status}');
       }
