@@ -8,7 +8,10 @@
       "languageVersion": "3.0"
     }
   ],
+  "generated": "2025-09-20T06:13:07.687454Z",
   "generator": "pub",
-  "generatorVersion": "3.8.1",
-  "pubCache": "file:///home/runner/.pub-cache"
+  "generatorVersion": "3.5.3",
+  "flutterRoot": "file:///C:/dev/flutter",
+  "flutterVersion": "3.24.3",
+  "pubCache": "file:///C:/Users/MIGUEL/AppData/Local/Pub/Cache"
 }
