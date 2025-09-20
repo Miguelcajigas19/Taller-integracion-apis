@@ -1,0 +1,13 @@
+name: flutter_app_taller
+description: Aplicación Dart web para el taller con APIs REST y GraphQL
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  # Solo dependencias para Dart web, sin Flutter
+  
+dev_dependencies:
+  # Ninguna por ahora

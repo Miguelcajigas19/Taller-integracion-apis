@@ -1,0 +1,14 @@
+{
+  "roots": [
+    "flutter_app_taller"
+  ],
+  "packages": [
+    {
+      "name": "flutter_app_taller",
+      "version": "1.0.0+1",
+      "dependencies": [],
+      "devDependencies": []
+    }
+  ],
+  "configVersion": 1
+}
