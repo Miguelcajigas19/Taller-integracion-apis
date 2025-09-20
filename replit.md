@@ -2,7 +2,15 @@
 
 ## Overview
 
-This is a Flutter web application project (Flutter App Taller) designed as a case study or workshop example. The application is configured to run in a web environment with Spanish language support and features a custom loading screen with animated spinner. The project appears to be a minimal Flutter setup focused on web deployment, likely used for educational or demonstration purposes.
+This is a Flutter web application project (Flutter App Taller) designed as a case study or workshop example. The application integrates REST and GraphQL APIs, provides local data persistence, and features a complete Spanish interface for managing posts and viewing country information. The project demonstrates modern Dart web development with secure DOM manipulation, API integration, and local storage capabilities.
+
+## Recent Changes
+
+**2024-09-20**: Implementación de filtrado de posts y funcionalidad de eliminación:
+- Configurado filtrado de posts de API REST para mostrar solo los 4 primeros posts anteriores al post específico "sunt aut facere repellat provident..."
+- Agregada funcionalidad para eliminar posts individualmente con confirmación del usuario
+- Implementados botones de eliminar en la interfaz solo para posts locales/de usuario (userId >= 100)
+- Mantenida persistencia segura que preserva posts del usuario entre sesiones
 
 ## User Preferences
 
